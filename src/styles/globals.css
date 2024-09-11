@@ -25,3 +25,93 @@ body {
     text-wrap: balance;
   }
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.header {
+  margin-bottom: 40px;
+}
+
+.header h1 {
+  font-size: 3rem;
+  color: #2a9d8f;
+}
+
+.header p {
+  font-size: 1.2rem;
+  color: #264653;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap; /* Permite que os botões fiquem em várias linhas se necessário */
+  justify-content: space-around;
+  margin: 40px 0;
+  gap: 20px; /* Adiciona espaçamento entre os botões */
+}
+
+.feature {
+  background-color: #e9c46a;
+  padding: 20px;
+  border-radius: 8px;
+  width: 30%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  text-align: center;
+  border: none;
+}
+
+.feature h2 {
+  font-size: 1.8rem;
+  color: #264653;
+  margin-bottom: 10px;
+}
+
+.feature p {
+  font-size: 1rem;
+  color: #333;
+}
+
+.feature:hover {
+  background-color: #f4a261;
+  transform: translateY(-5px);
+}
+
+
+.footer {
+  background-color: #264653;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+
