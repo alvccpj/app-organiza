@@ -273,6 +273,35 @@ h1 {
   background-color: #21867a;
 }
 
+.edit-button {
+  background-color: #ffb100;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.edit-button:hover {
+  background-color: #e8a700;
+}
+
+.delete-button {
+  background-color: #ff4d4d;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.delete-button:hover {
+  background-color: #e60000;
+}
+
+
 
 
 

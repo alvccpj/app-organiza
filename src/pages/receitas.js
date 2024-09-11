@@ -9,6 +9,7 @@ const Receitas = () => {
     description: ''
   });
   const [records, setRecords] = useState([]);
+  const [editIndex, setEditIndex] = useState(null); // Índice do registro sendo editado
   const router = useRouter();
 
   // Carrega os registros do localStorage quando a página é carregada
@@ -19,26 +20,55 @@ const Receitas = () => {
 
   // Atualiza os valores dos campos de entrada
   const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
+    if (e.target.name === 'amount') {
+      // Formata o valor com pontos e vírgulas
+      const value = e.target.value.replace(/[^\d,]/g, '');
+      setForm({
+        ...form,
+        [e.target.name]: value
+      });
+    } else {
+      setForm({
+        ...form,
+        [e.target.name]: e.target.value
+      });
+    }
   };
 
-  // Submete o formulário
+  // Formata o valor para exibição
+  const formatValue = (value) => {
+    if (!value) return '';
+    return value
+      .replace(/\D/g, '') // Remove caracteres não numéricos
+      .replace(/(\d)(\d{8})$/, '$1.$2') // Adiciona ponto para milhões
+      .replace(/(\d)(\d{5})$/, '$1.$2') // Adiciona ponto para milhares
+      .replace(/(\d)(\d{2})$/, '$1,$2'); // Adiciona vírgula para centavos
+  };
+
+  // Submete o formulário (adiciona ou atualiza um registro)
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.category || !form.date || !form.amount || !form.description) {
+    const formattedAmount = form.amount.replace(',', '.'); // Converte vírgula para ponto para armazenamento
+    if (!form.category || !form.date || !formattedAmount || !form.description) {
       alert('Por favor, preencha todos os campos.');
       return;
     }
 
-    // Adiciona o novo registro
-    const newRecords = [...records, form];
-    setRecords(newRecords);
+    let updatedRecords;
+    if (editIndex === null) {
+      // Adiciona um novo registro
+      updatedRecords = [...records, { ...form, amount: formattedAmount }];
+    } else {
+      // Atualiza o registro existente
+      updatedRecords = records.map((record, index) =>
+        index === editIndex ? { ...form, amount: formattedAmount } : record
+      );
+      setEditIndex(null); // Limpa o índice de edição após salvar
+    }
 
     // Salva os registros no localStorage
-    localStorage.setItem('receitas', JSON.stringify(newRecords));
+    setRecords(updatedRecords);
+    localStorage.setItem('receitas', JSON.stringify(updatedRecords));
 
     // Limpa o formulário
     setForm({
@@ -53,9 +83,16 @@ const Receitas = () => {
   const handleDelete = (index) => {
     const updatedRecords = records.filter((_, i) => i !== index);
     setRecords(updatedRecords);
-
-    // Atualiza o localStorage
     localStorage.setItem('receitas', JSON.stringify(updatedRecords));
+  };
+
+  // Preenche o formulário para edição
+  const handleEdit = (index) => {
+    setForm({
+      ...records[index],
+      amount: formatValue(records[index].amount) // Formata o valor para edição
+    });
+    setEditIndex(index);
   };
 
   // Navega para a página inicial
@@ -94,7 +131,7 @@ const Receitas = () => {
         <div className="input-group">
           <label>Valor (R$)</label>
           <input
-            type="number"
+            type="text"
             name="amount"
             value={form.amount}
             onChange={handleChange}
@@ -112,7 +149,9 @@ const Receitas = () => {
           />
         </div>
 
-        <button type="submit" className="submit-button">Adicionar Receita</button>
+        <button type="submit" className="submit-button">
+          {editIndex === null ? 'Adicionar Receita' : 'Atualizar Receita'}
+        </button>
       </form>
 
       <h2>Registros de Receitas</h2>
@@ -122,8 +161,9 @@ const Receitas = () => {
         ) : (
           records.map((record, index) => (
             <li key={index}>
-              <strong>{record.category}</strong> - {record.date} - R${record.amount} <br />
+              <strong>{record.category}</strong> - {record.date} - R${formatValue(record.amount)} <br />
               {record.description}
+              <button onClick={() => handleEdit(index)} className="edit-button">Editar</button>
               <button onClick={() => handleDelete(index)} className="delete-button">Excluir</button>
             </li>
           ))
