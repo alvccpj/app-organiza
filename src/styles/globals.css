@@ -127,6 +127,7 @@ body {
 h1 {
   color: #2a9d8f;
   margin-bottom: 20px;
+  font-size: 30px;
 }
 
 .auth-form .input-group {
@@ -273,6 +274,7 @@ h1 {
   background-color: #21867a;
 }
 
+/* CSS da Página de Receitas*/
 .edit-button {
   background-color: #ffb100;
   color: #fff;
@@ -302,9 +304,64 @@ h1 {
 }
 
 
+/* CSS do Painel Principal */
+.painel-container {
+  padding: 20px;
+}
 
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
+.overview {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
 
+.balance {
+  flex: 1;
+  text-align: center;
+}
 
+.recent-transactions {
+  flex: 2;
+}
+
+.recent-transactions ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.recent-transactions li {
+  margin-bottom: 10px;
+}
+
+.charts {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.chart-container {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.chart-container canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.navigation-buttons {
+  text-align: center;
+}
+
+.navigation-buttons button {
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
 
 
