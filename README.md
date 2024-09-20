@@ -4,8 +4,7 @@ Esse é um projeto para minha cadeira de Frontend Frameworks do curso de Ciênci
 
 Organiza é uma aplicação web de controle e gestão de finanças pessoais, desenvolvida com **Next.js**. A ferramenta oferece uma interface prática e intuitiva para ajudar os usuários a acompanharem e gerenciarem suas receitas, despesas e investimentos de forma eficiente. 
 
-![nextjs](https://github.com/user-attachments/assets/af6d57d4-4300-4157-b407-44bdd8045017)
-
+![nextjs](https://github.com/user-attachments/assets/cf4a6e6e-be49-4e2c-897c-9f6656f11547)
 
 ## Funcionalidades
 
